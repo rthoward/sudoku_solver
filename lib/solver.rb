@@ -5,10 +5,19 @@ module Sudoku
 
 	class Solver
 
-
 		def initialize(lines)
-			chomped = lines.map { |line| line.chomp.split('') }
+			chars = lines.map { |line| line.chomp.split('') }
+			@grid = chars.flatten.map { |value| Cell.new(value.to_i) }
+		end
 
+		def dump
+			i = 0
+			output = ""
+			@grid.each { |cell|
+				STDOUT.print (if cell.value.nil? then " " else cell.value end)
+				i += 1
+				puts if (i % 9) == 0
+			}
 		end
 	end
 
@@ -20,9 +29,9 @@ module Sudoku
 			if value == 0
 				@possibilities = Set.new(Array(1..9))
 				@value = nil
-				else
+			else
 				@value = value
-				@possibilities = Set.new(Array(1..9)).delete(@value)
+				@possibilities = Set.new([@value])
 			end
 		end
 	end
