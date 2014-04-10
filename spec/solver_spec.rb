@@ -1,5 +1,4 @@
 require_relative '../lib/solver.rb'
-require 'set'
 
 describe 'Solver' do
 
@@ -11,28 +10,19 @@ describe 'Solver' do
 	describe '#new' do
 		it "takes an array of puzzle lines and returns new Solver object" do
 			@solver.should be_an_instance_of Sudoku::Solver
+			@solver.grid.size.should eq 81
 		end
 	end
 
-end
-
-describe 'Cell' do
-
-	describe '#new' do
-		context "with a filled-in cell" do
-			it "creates a new cell object with only one possibility" do
-				cell = Sudoku::Cell.new(3)
-				cell.value.should eq 3
-				cell.possibilities.should eq Set.new([3])
-			end
+	describe '#row' do
+		it "takes a row number argument and returns all cells in that row" do
+			@solver.row(1).map { |cell| cell.value }.should eq [0, 8, 9, 0, 0, 7, 4, 0, 5]
 		end
+	end
 
-		context "with an empty cell" do
-			it "creates a new Cell object with 9 possibilities" do
-				cell = Sudoku::Cell.new(0)
-				cell.value.should eq nil
-				cell.possibilities.should eq Set.new([1, 2, 3, 4, 5, 6, 7, 8, 9])
-			end
+	describe '#col' do
+		it "takes a col number argument and returns all cells in that column" do
+			@solver.col(3).map { |cell| cell.value }.should eq [9, 0, 0, 2, 7, 1, 0, 0, 8]
 		end
 	end
 
