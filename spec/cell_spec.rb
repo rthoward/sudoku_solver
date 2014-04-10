@@ -1,4 +1,4 @@
-require_relative '../lib/solver.rb'
+require_relative '../lib/cell.rb'
 require 'set'
 
 describe 'Cell' do
@@ -15,7 +15,8 @@ describe 'Cell' do
 		context "with an empty cell" do
 			it "creates a new Cell object with 9 possibilities" do
 				cell = Sudoku::Cell.new(0, 2, 2)
-				cell.value.should eq nil
+				cell.value.should eq 0
+				cell.solved?.should eq false
 				cell.possibilities.should eq Set.new([1, 2, 3, 4, 5, 6, 7, 8, 9])
 			end
 		end
