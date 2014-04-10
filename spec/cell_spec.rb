@@ -8,6 +8,7 @@ describe 'Cell' do
 			it "creates a new cell object with only one possibility" do
 				cell = Sudoku::Cell.new(3, 1, 1)
 				cell.value.should eq 3
+				cell.solved?.should eq true
 				cell.possibilities.should eq Set.new([3])
 			end
 		end

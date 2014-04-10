@@ -1,5 +1,4 @@
 require 'pp'
-require 'set'
 require_relative './cell.rb'
 
 module Sudoku
