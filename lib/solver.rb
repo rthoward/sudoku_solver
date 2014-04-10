@@ -25,6 +25,16 @@ module Sudoku
 			@grid.select { |cell| cell.col == colnum }
 		end
 
+		def eliminate(cells)
+			solved_values = cells.select 	{ |cell|
+				cell.solved? }.map { |cell| cell.value}
+			unsolved_cells = cells.select { |cell| !cell.solved?}
+
+			unsolved_cells.each { |cell|
+				cell.remove_possibilities!(solved_values)
+			}
+		end
+
 		def dump
 			i = 0
 			output = ""

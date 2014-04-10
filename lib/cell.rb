@@ -23,6 +23,10 @@ module Sudoku
 			!@value.nil?
 		end
 
+		def remove_possibilities!(eliminated)
+			@possibilities = @possibilities.subtract(eliminated)
+		end
+
 	end
 
 end
