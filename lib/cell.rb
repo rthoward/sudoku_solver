@@ -6,6 +6,7 @@ module Sudoku
 		# [1] - value of the cell. 0 == blank cell
 		def initialize(value, x, y)
 			@col, @row = x, y
+
 			@box = Cell.box(x, y)
 
 			if value == 0
