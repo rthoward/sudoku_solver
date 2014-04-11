@@ -1,4 +1,5 @@
 require_relative '../lib/solver.rb'
+require 'pp'
 
 describe 'Solver' do
 
@@ -26,6 +27,13 @@ describe 'Solver' do
 		end
 	end
 
+	describe '#block' do
+		it "takes a blocknum argument and returns all cells in that block" do
+			@solver.block(2).map { |cell| cell.value }.should eq [0, 0, 7, 0, 0, 0, 0, 2, 3]
+			@solver.block(9).map { |cell| cell.value }.should eq [0, 7, 0, 0, 0, 0, 5, 1, 0]
+		end
+	end
+
 	describe '#eliminate' do
 		it "takes a list of cells and reduces their possibilities" do
 			@solver.eliminate(@solver.col(1))
@@ -35,6 +43,20 @@ describe 'Solver' do
 			@solver.eliminate(@solver.row(1))
 			@solver.grid.at(0).possibilities.should
 				eq Set.new([1, 2, 3])
+		end
+	end
+
+	describe '#most_constrained' do
+		it "returns the most constrained (least possibilities) cell in the grid" do
+			# todo: add tests
+		end
+	end
+
+	describe '#solve' do
+		it "solves the sudoku puzzle" do
+			# todo: pretty useless test
+			@solver.solve
+			@solver.solved?.should eq true
 		end
 	end
 

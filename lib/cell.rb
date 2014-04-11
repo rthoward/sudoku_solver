@@ -1,7 +1,7 @@
 module Sudoku
 
 	class Cell
-		attr_accessor :possibilities, :row, :col
+		attr_accessor :row, :col, :box
 
 		# [1] - value of the cell. 0 == blank cell
 		def initialize(value, x, y)
@@ -26,8 +26,25 @@ module Sudoku
 			!@value.nil?
 		end
 
+		def solvable?
+			@possibilities.size == 1
+		end
+
+		def try_solve
+			if solvable?
+				@value = @possibilities.to_a[0]
+				true
+			else
+				false
+			end
+		end
+
 		def remove_possibilities!(eliminated)
 			@possibilities = @possibilities.subtract(eliminated)
+		end
+
+		def possibilities
+			@possibilities.size
 		end
 
 		def self.box(x, y)
