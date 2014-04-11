@@ -27,7 +27,7 @@ module Sudoku
 		end
 
 		def solvable?
-			@possibilities.size == 1
+			num_possibilities == 1
 		end
 
 		def try_solve
@@ -44,6 +44,10 @@ module Sudoku
 		end
 
 		def possibilities
+			@possibilities
+		end
+
+		def num_possibilities
 			@possibilities.size
 		end
 

@@ -41,7 +41,7 @@ module Sudoku
 
 		def most_constrained
 			@grid.select { |cell| !cell.solved? }.sort { |x, y|
-				x.possibilities <=> y.possibilities}[0]
+				x.num_possibilities <=> y.num_possibilities}[0]
 		end
 
 		def solve
