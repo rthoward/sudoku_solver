@@ -1,5 +1,4 @@
 require_relative '../lib/cell.rb'
-require 'set'
 
 describe 'Cell' do
 
