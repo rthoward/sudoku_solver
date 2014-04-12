@@ -4,8 +4,8 @@ require 'pp'
 describe 'Solver' do
 
 	before :each do
-		example1_path = File.expand_path('../../examples/example1', __FILE__)
-		@solver = Sudoku::Solver.new(File.open(example1_path, "r").readlines)
+		easy1_path = File.expand_path('../../examples/easy1', __FILE__)
+		@solver = Sudoku::Solver.new(File.open(easy1_path, "r").readlines)
 	end
 
 	describe '#new' do
