@@ -37,12 +37,10 @@ describe 'Solver' do
 	describe '#eliminate' do
 		it "takes a list of cells and reduces their possibilities" do
 			@solver.eliminate(@solver.col(1))
-			@solver.grid.at(0).possibilities.should
-				eq Set.new([1, 2, 3, 4, 5, 7, 8])
+			@solver.grid.at(0).possibilities.should eq Set.new([1, 2, 3, 4, 5, 7, 8])
 
 			@solver.eliminate(@solver.row(1))
-			@solver.grid.at(0).possibilities.should
-				eq Set.new([1, 2, 3])
+			@solver.grid.at(0).possibilities.should eq Set.new([1, 2, 3])
 		end
 	end
 
