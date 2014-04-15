@@ -3,7 +3,7 @@ require 'set'
 module Sudoku
 
 	class Cell
-		attr_accessor :row, :col, :box
+		attr_accessor :row, :col, :box, :possibilities
 
 		# [1] - value of the cell. 0 == blank cell
 		def initialize(value, x, y, possibilities = nil)

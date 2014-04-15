@@ -20,7 +20,14 @@ describe 'Cell' do
 				cell.possibilities.should eq Set.new([1, 2, 3, 4, 5, 6, 7, 8, 9])
 			end
 		end
+	end
 
+	describe '#remove_possibilities' do
+		it 'takes a Set param and returns a new cell with that set subtracted' do
+			cell = Sudoku::Cell.new(0, 0, 2)
+			possibilities = cell.remove_possibilities(Set.new([1, 2, 3])).possibilities
+			possibilities.should eq Set.new([4, 5, 6, 7, 8, 9])
+		end
 	end
 
 	describe 'self.box' do
