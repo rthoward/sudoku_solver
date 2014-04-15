@@ -1,62 +1,36 @@
 require_relative '../lib/solver.rb'
 require 'pp'
+include Sudoku
 
 describe 'Solver' do
 
 	before :each do
 		easy1_path = File.expand_path('../../examples/easy1', __FILE__)
-		@solver = Sudoku::Solver.new(File.open(easy1_path, "r").readlines)
+		@grid = create_grid(File.open(easy1_path, "r").readlines)
 	end
 
-	describe '#new' do
-		it "takes an array of puzzle lines and returns new Solver object" do
-			@solver.should be_an_instance_of Sudoku::Solver
-			@solver.grid.size.should eq 81
+	describe 'create_grid' do
+		it 'takes an array of lines and returns a new grid obj' do
+			@grid.size.should eq 81
 		end
 	end
 
-	describe '#row' do
-		it "takes a row number argument and returns all cells in that row" do
-			@solver.row(1).map { |cell| cell.value }.should eq [0, 8, 9, 0, 0, 7, 4, 0, 5]
+	describe 'row' do
+		it 'returns the given row of the given grid' do
+			values(row(@grid, 1)).should eq [0, 8, 9, 0, 0, 7, 4, 0, 5]
 		end
 	end
 
-	describe '#col' do
-		it "takes a col number argument and returns all cells in that column" do
-			@solver.col(3).map { |cell| cell.value }.should eq [9, 0, 0, 2, 7, 1, 0, 0, 8]
+	describe 'col' do
+		it 'returns the given column of the given grid' do
+			values(col(@grid, 3)).should eq [9, 0, 0, 2, 7, 1, 0, 0, 8]
 		end
 	end
 
-	describe '#block' do
-		it "takes a blocknum argument and returns all cells in that block" do
-			@solver.block(2).map { |cell| cell.value }.should eq [0, 0, 7, 0, 0, 0, 0, 2, 3]
-			@solver.block(9).map { |cell| cell.value }.should eq [0, 7, 0, 0, 0, 0, 5, 1, 0]
-		end
-	end
-
-	describe '#eliminate' do
-		it "takes a list of cells and reduces their possibilities" do
-			@solver.eliminate(@solver.col(1))
-			@solver.grid.at(0).possibilities.should
-				eq Set.new([1, 2, 3, 4, 5, 7, 8])
-
-			@solver.eliminate(@solver.row(1))
-			@solver.grid.at(0).possibilities.should
-				eq Set.new([1, 2, 3])
-		end
-	end
-
-	describe '#most_constrained' do
-		it "returns the most constrained (least possibilities) cell in the grid" do
-			# todo: add tests
-		end
-	end
-
-	describe '#solve' do
-		it "solves the sudoku puzzle" do
-			# todo: pretty useless test
-			@solver.solve
-			@solver.solved?.should eq true
+	describe 'block' do
+		it 'returns the given block of the given grid' do
+			values(block(@grid, 1)).should eq [0, 8, 9, 0, 0, 0, 0, 7, 0]
+			values(block(@grid, 9)).should eq [0, 7, 0, 0, 0, 0, 5, 1, 0]
 		end
 	end
 
